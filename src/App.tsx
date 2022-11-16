@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import { Background } from "./assets";
+import { Route, Routes } from "react-router-dom";
+import { RegistrationPage } from "./pages/notice/RegistrationPage";
+import { StyleProvider } from "./styles";
+import { Header } from "./components/header";
+import { HomePage } from "./pages/HomePage";
+import { CompnayManagementPage } from "./pages/company/ManagementPage";
+import { ReportManagementPage } from "./pages/report/ManagementPage";
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <_Background>
+      <StyleProvider>
+        <_Wrapper>
+          <div>
+            <Header />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/notice/registration"
+                element={<RegistrationPage />}
+              />
+              <Route
+                path="/company/management"
+                element={<CompnayManagementPage />}
+              />
+              <Route
+                path="/report/management"
+                element={<ReportManagementPage />}
+              />
+            </Routes>
+          </div>
+        </_Wrapper>
+      </StyleProvider>
+    </_Background>
   );
-}
+};
 
-export default App;
+const _Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: columns;
+  > div {
+    width: 1420px;
+  }
+`;
+
+const _Background = styled.div`
+  background-image: url(${Background});
+  height: 100vh;
+  background-size: cover;
+`;
